@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
+from starlette.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List
 from services.aiService import get_ai_response
 
 class Message(BaseModel):
@@ -9,20 +9,31 @@ class Message(BaseModel):
 
 class Debate(BaseModel):
     topic: str
-    messages: List[Message]
+    messages: list[Message]
 
 app = FastAPI()
+
+# Replace the origin with the URL your frontend is served from
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/api/ai-response")
 async def ai_response(debate: Debate):
     try:
-        # Extract the user's message from the debate
-        user_message = debate.messages[-1].text if debate.messages else ""
-
         # Get the AI's response
-        ai_response = get_ai_response(debate.topic, user_message)
+        ai_response = get_ai_response(debate.topic, debate.messages)
 
         # Return the AI's response
         return {"aiResponse": ai_response}
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail=str(e))
