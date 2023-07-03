@@ -26,7 +26,6 @@ function LandingPage() {
       <div className="landing-box">
         <header className="app-header">
           <h1>DebateGPT</h1>
-          <p>Enter a debate topic to start a debate with the AI.</p>
         </header>
         <main>
           <form onSubmit={handleSubmit} className="topic-form">

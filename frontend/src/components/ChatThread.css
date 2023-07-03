@@ -6,27 +6,27 @@
     width: 100%;
     height: 100%;
     overflow-y: hidden;
-    padding: 1em;
+    padding: 0 2em;
     box-sizing: border-box;
     background-color: rgb(52, 53, 64);
 }
 
 .chat-thread>.message {
     max-width: 80%;
-    margin-bottom: 1em;
-    padding: 1em;
+    padding: 0.5em;
     border-radius: 10px;
-    font-size: 1.1em;
+    font-size: 1em;
     white-space: pre-line;
+    margin: 0.5em 0.5em;
 }
 
 .chat-thread>.message.user-message {
     align-self: flex-end;
     /* alignment for the user's messages */
-    background-color: #61dafb;
+    background-color: #46a2bb;
 }
 
 .chat-thread>.message.ai-message {
-    background-color: #ccc;
+    background-color: #868686;
 }
 

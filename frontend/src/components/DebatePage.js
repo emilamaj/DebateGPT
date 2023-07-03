@@ -53,7 +53,7 @@ function DebatePage() {
   return (
     <div className="debate-page">
       <header className="app-header">
-        <h1>DebateGPT on:</h1>
+        <h1>DebateGPT on</h1>
         <h1 className='header-topic'>{topic}</h1>
       </header>
       <main className="chat-main">
