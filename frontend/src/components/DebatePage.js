@@ -33,10 +33,9 @@ function DebatePage() {
         <h1>Debate on: {topic}</h1>
       </header>
       <main className="chat-main">
-        <ChatThread messages={messages} />
+        <ChatThread messages={messages} isLoading={loading} />
       </main>
       <MessageInputBar onMessageSubmit={handleUserMessage} disabled={loading} />
-      {loading && <p>Loading AI response...</p>}
     </div>
   );
 }
