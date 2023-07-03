@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './MessageInputBar.css';
 
 function MessageInputBar({ onMessageSubmit, disabled }) {
   const [message, setMessage] = useState('');
@@ -16,15 +17,18 @@ function MessageInputBar({ onMessageSubmit, disabled }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="message-input-form">
       <input
         type="text"
         value={message}
         onChange={handleInputChange}
         disabled={disabled}
         placeholder="Type your message here"
+        className="message-input"
       />
-      <button type="submit" disabled={disabled}>Submit</button>
+      <button type="submit" disabled={disabled} className="message-submit-button">
+        Submit
+      </button>
     </form>
   );
 }
