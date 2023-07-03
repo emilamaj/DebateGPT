@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from starlette.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from services.aiService import get_ai_response
+from services.aiService import get_ai_response, get_ai_welcome
 
 class Message(BaseModel):
     text: str
@@ -31,6 +31,18 @@ async def ai_response(debate: Debate):
     try:
         # Get the AI's response
         ai_response = get_ai_response(debate.topic, debate.messages)
+
+        # Return the AI's response
+        return {"aiResponse": ai_response}
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/api/ai-welcome")
+async def ai_welcome(debate: Debate):
+    try:
+        # Get the AI's response
+        ai_response = get_ai_welcome(debate.topic)
 
         # Return the AI's response
         return {"aiResponse": ai_response}

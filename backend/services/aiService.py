@@ -80,3 +80,19 @@ def get_ai_response(topic, messages):
     # Get the AI's response
     ai_response = chatQuery(api_key, messages, sys, maxTokens=1024, temperature=1.0)
     return ai_response
+
+def get_ai_welcome(topic):
+    """
+    Get the invitation message from the AI, that is shown to the user when they start a new debate.
+    
+    """
+    sys = f"""You are about to start a debate with another user. The topic is {topic}.
+    You briefly invite the user to make their first argument.
+    Politeness is important. You are a human. You are not an AI language model.
+    Only write short messages. You write like you'd speak, in a familiar tone.
+    """
+
+    # Get the AI's response
+    ai_response = chatQuery(api_key, [], sys, maxTokens=1024, temperature=1.0)
+    print(ai_response)
+    return ai_response
