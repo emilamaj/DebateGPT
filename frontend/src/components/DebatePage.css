@@ -1,4 +1,3 @@
-
 .debate-page {
     display: flex;
     flex-direction: column;
@@ -6,13 +5,23 @@
     background-color: #282c34;
     color: white;
     font-family: 'Arial', sans-serif;
-    padding-bottom: 70px; /* height of the input bar */
-  }
-  
-  .app-header {
-    margin-bottom: 2em;
-  }
-  
-  .chat-main {
+    /* padding-bottom: 70px; */
+    /* height of the input bar */
+}
+
+.debate-page .app-header {
+    margin: 1em;
+    /* Center the header text */
+    display: flex;
+    justify-content: center;
+
+}
+
+.debate-page .app-header .header-topic {
+    color: #61dafb;
+    margin-left: 5px;
+}
+
+.chat-main {
     overflow-y: hidden;
-  }
+}

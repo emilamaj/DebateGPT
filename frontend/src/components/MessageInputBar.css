@@ -6,12 +6,13 @@
     bottom: 0;
     width: 100%;
     background-color: #282c34;
-    padding: 10px;
+    padding: 30px;
     box-sizing: border-box;
 }
 
 .message-input {
-    width: 300px;
+    min-width: 400px;
+    max-width: 500px;
     padding: 0.5em;
     font-size: 1.2em;
     border: none;
@@ -25,4 +26,5 @@
     background-color: #61dafb;
     border: none;
     cursor: pointer;
+    border-radius: 2px;
 }
