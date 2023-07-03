@@ -23,23 +23,25 @@ function LandingPage() {
 
   return (
     <div className="landing-page">
-      <header className="app-header">
-        <h1>DebateGPT</h1>
-        <p>Enter a debate topic to start a debate with the AI.</p>
-      </header>
-      <main>
-        <form onSubmit={handleSubmit} className="topic-form">
-          <input
-            type="text"
-            value={topic}
-            onChange={handleInputChange}
-            placeholder="Enter a debate topic"
-            className="topic-input"
-          />
-          <button type="submit" className="submit-button">Start Debate</button>
-        </form>
-        {error && <p className="error-message">{error}</p>}
-      </main>
+      <div className="landing-box">
+        <header className="app-header">
+          <h1>DebateGPT</h1>
+          <p>Enter a debate topic to start a debate with the AI.</p>
+        </header>
+        <main>
+          <form onSubmit={handleSubmit} className="topic-form">
+            <input
+              type="text"
+              value={topic}
+              onChange={handleInputChange}
+              placeholder="Enter a debate topic"
+              className="topic-input"
+            />
+            <button type="submit" className="submit-button">Start Debate</button>
+          </form>
+          {error && <p className="error-message">{error}</p>}
+        </main>
+      </div>
     </div>
   );
 }

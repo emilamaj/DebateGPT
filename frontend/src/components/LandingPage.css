@@ -4,9 +4,17 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #282c34;
-    color: white;
+    background-color: rgb(52, 53, 64);
+    color: rgb(236, 236, 236);
     font-family: 'Arial', sans-serif;
+}
+
+.landing-box {
+    background-color: #282c34;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid #202020;
 }
 
 .app-header {
@@ -27,7 +35,7 @@
 }
 
 .topic-input {
-    width: 300px;
+    min-width: 300px;
     border-radius: 4px;
     border: none;
 }
@@ -35,6 +43,7 @@
 .submit-button {
     width: 150px;
     background-color: #61dafb;
+    border-radius: 2px;
     border: none;
     cursor: pointer;
 }
