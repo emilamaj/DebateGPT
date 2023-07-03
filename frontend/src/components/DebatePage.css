@@ -1,0 +1,20 @@
+
+.debate-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: #282c34;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    padding-bottom: 70px; /* height of the input bar */
+  }
+  
+  .app-header {
+    margin-bottom: 2em;
+  }
+  
+  .chat-main {
+    overflow-y: auto;
+    height: calc(100vh - 140px); /* height of the viewport minus the header and input bar heights */
+  }

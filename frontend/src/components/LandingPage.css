@@ -1,0 +1,44 @@
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #282c34;
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+.app-header {
+    margin-bottom: 2em;
+}
+
+.topic-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topic-input,
+.submit-button {
+    font-size: 1.2em;
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+.topic-input {
+    width: 300px;
+    border-radius: 4px;
+    border: none;
+}
+
+.submit-button {
+    width: 150px;
+    background-color: #61dafb;
+    border: none;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+}
