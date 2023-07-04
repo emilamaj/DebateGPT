@@ -1,20 +1,22 @@
 # DebateGPT: A Debate adversary on any topic
 ## Introduction
-DebateGPT is an AI chat adversary that can debate on any topic.
-You select the topic, and start arguing right away.
-This project was inspired by Marc Andreessen's remarks on [Lex Fridman's podcast 386](https://www.youtube.com/watch?v=-hxeDjAxvJ8&t=940s) (at 15:40), where he says that he experimented with GPT-4 debating with itself.
+DebateGPT is an AI chat adversary that can debate on any topic.  
+You select the topic, and start arguing right away.  
+This project was inspired by Marc Andreessen's remarks on [Lex Fridman's podcast 386](https://www.youtube.com/watch?v=-hxeDjAxvJ8&t=940s) (at 15:40), where talks about his experiments with GPT-4 debating with itself.
 
 ![Landing page, with "Taxing the rich" set as the topic](screen-debate-landing.png)
 
 It uses the [GPT-3.5-turbo](https://platform.openai.com/docs/models/gpt-3-5) model to generate responses to your arguments.  
 You can try out the demo at [debategpt.emileamaj.xyz](https://debategpt.emileamaj.xyz/).  
-It uses a simple system prompt instructing the chat-based Large Language Model to debate with the user.
+It uses a simple system prompt instructing the chat-based Large Language Model to debate with the user.  
 
 ![The AI taking the side of taxing the rich](screen-debate-thread.png)
+
 The AI automatically takes the opposite side of the user's argument, and tries to refute it.  
 
 
 ![The AI against taxing the rich](screen-debate-thread-opposite.png)
+
 The "convictions" of the AI are in a way, set by the user's initial stance in the debate.  
 
 ## Running on your machine
