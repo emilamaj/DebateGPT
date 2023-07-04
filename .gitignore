@@ -25,5 +25,6 @@ yarn-error.log*
 
 # Prompts used for prototyping various parts of the project
 *.gpt.md
-
+*.zip
 __pycache__
+release

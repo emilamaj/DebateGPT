@@ -5,10 +5,14 @@ import ChatThread from './ChatThread';
 import MessageInputBar from './MessageInputBar';
 import './DebatePage.css';
 
+// Axios default url
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+
 function DebatePage() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
+  const location = 
+  useLocation();
   const topic = location.state.topic;
 
   // UseEffect hook to run once on component mount
@@ -18,7 +22,7 @@ function DebatePage() {
 
       try {
         console.log('Getting initial welcome message from AI');
-        const response = await axios.post('http://localhost:8000/api/ai-welcome', { topic, messages: [] });
+        const response = await axios.post('/api/ai-welcome', { topic, messages: [] });
         console.log('AI welcome msg:', response.data.aiResponse);
         setMessages([{ text: response.data.aiResponse, byUser: false }]);
       } catch (error) {
@@ -27,7 +31,7 @@ function DebatePage() {
       setLoading(false);
     };
     getInitialMessage();
-  }, []);
+  }, [topic]);
 
   const handleUserMessage = async (message) => {
     // Register the user message
@@ -40,7 +44,7 @@ function DebatePage() {
     setLoading(true);
     try {
       console.log('Sending messages to AI. New msg:', message);
-      const response = await axios.post('http://localhost:8000/api/ai-response', { topic, messages: msgs });
+      const response = await axios.post('/api/ai-response', { topic, messages: msgs });
       console.log('AI response:', response.data.aiResponse);
       msgs = [...msgs, { text: response.data.aiResponse, byUser: false }]
       setMessages(msgs);
