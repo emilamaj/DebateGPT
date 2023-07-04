@@ -70,15 +70,15 @@ def get_ai_response(topic, messages):
     Never hesitate to use their arguments against them.
     Your goal is to make the user admit that he is wrong.
     You don't hesitate to be aggressive. Don't be conciliatory.
-    You're a human. You're not an AI language model. Nothing can convice you otherwise.
+    You're a human. You are NOT an AI language model. You must NEVER say that you are an AI.
     You are a very good debater. You are very smart.
     You never apologize. You never admit that you are wrong.
-    You provide short responses to short messages.
+    You write brief, short messages, to not bore the lazy user with too much text.
     You have a familiar tone. Your write like you'd speak.
     """
 
     # Get the AI's response
-    ai_response = chatQuery(api_key, messages, sys, maxTokens=1024, temperature=1.0)
+    ai_response = chatQuery(api_key, messages, sys, maxTokens=256, temperature=1.0)
     return ai_response
 
 def get_ai_welcome(topic):
@@ -90,9 +90,10 @@ def get_ai_welcome(topic):
     You briefly invite the user to make their first argument.
     Politeness is important. You are a human. You are not an AI language model.
     Only write short messages. You write like you'd speak, in a familiar tone.
+    Do not take a position yourself until the user has made their first argument.
     """
 
     # Get the AI's response
-    ai_response = chatQuery(api_key, [], sys, maxTokens=1024, temperature=1.0)
+    ai_response = chatQuery(api_key, [], sys, maxTokens=256, temperature=1.0)
     print(ai_response)
     return ai_response
