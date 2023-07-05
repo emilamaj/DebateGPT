@@ -6,7 +6,6 @@
     width: 100%;
     height: 100%;
     overflow-y: hidden;
-    padding: 0 2em;
     box-sizing: border-box;
     background-color: rgb(52, 53, 64);
 }

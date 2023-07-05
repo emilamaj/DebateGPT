@@ -10,16 +10,22 @@
 }
 
 .debate-page .app-header {
-    margin: 1em;
+    padding: 1em;
+    margin: 0;
     /* Center the header text */
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+}
 
+.app-header h1 {
+    font-size: 1.5em;
+    margin: 0;
+    display: inline;
 }
 
 .debate-page .app-header .header-topic {
     color: #61dafb;
-    margin-left: 8px;
 }
 
 .chat-main {

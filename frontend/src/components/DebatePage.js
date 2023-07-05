@@ -56,10 +56,10 @@ function DebatePage() {
 
   return (
     <div className="debate-page">
-      <header className="app-header">
-        <h1>DebateGPT on</h1>
+      <div className="app-header">
+        <h1>DebateGPT on&nbsp;</h1>
         <h1 className='header-topic'>{topic}</h1>
-      </header>
+      </div>
       <main className="chat-main">
         <ChatThread messages={messages} isLoading={loading} />
       </main>
