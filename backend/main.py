@@ -23,6 +23,7 @@ app.add_middleware(
 
 @app.post("/api/ai-response")
 async def ai_response(debate: Debate):
+    print(f"User message: {debate.messages[-1].text}")
     try:
         # Get the AI's response
         ai_response = get_ai_response(debate.topic, debate.messages)
@@ -35,6 +36,7 @@ async def ai_response(debate: Debate):
     
 @app.post("/api/ai-welcome")
 async def ai_welcome(debate: Debate):
+    print(f"Topic: {debate.topic}")
     try:
         # Get the AI's response
         ai_response = get_ai_welcome(debate.topic)
