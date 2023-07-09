@@ -11,14 +11,22 @@
 
 .landing-box {
     background-color: #282c34;
-    padding: 2em;
+    margin: 1em;
+    padding: 1.5em;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     border: 1px solid #202020;
 }
 
-.app-header {
-    margin-bottom: 2em;
+.landing-header-title {
+    margin: 0 0 0.2em 0;
+    font-size: 2em;
+}
+
+.landing-header-subtitle {
+    margin: 0 0 1em 0;
+    font-size: 1.2em;
+    color: #61dafb;
 }
 
 .topic-form {
@@ -27,26 +35,28 @@
     align-items: center;
 }
 
-.topic-input,
-.submit-button {
-    font-size: 1.2em;
-    padding: 0.5em;
-    margin-bottom: 1em;
-}
-
 .topic-input {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    padding: 0.5em 0.5em;
     min-width: 100px;
     width: 100%;
     border-radius: 4px;
     border: none;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
 }
 
 .submit-button {
-    /* width: 150px; */
+    font-size: 1.2em;
+    padding: 0.5em 0.5em;
+    /* margin-bottom: 1em; */
+    color: #282c34;
     background-color: #61dafb;
     border-radius: 2px;
     border: none;
     cursor: pointer;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .error-message {

@@ -24,8 +24,9 @@ function LandingPage() {
   return (
     <div className="landing-page">
       <div className="landing-box">
-        <header className="app-header">
-          <h1>DebateGPT</h1>
+        <header className="landing-header">
+          <h1 className="landing-header-title">DebateGPT</h1>
+          <p className="landing-header-subtitle">Debate me on any topic</p>
         </header>
         <main>
           <form onSubmit={handleSubmit} className="topic-form">

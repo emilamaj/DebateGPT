@@ -23,11 +23,11 @@ function MessageInputBar({ onMessageSubmit, disabled }) {
         value={message}
         onChange={handleInputChange}
         disabled={disabled}
-        placeholder="Type your message here"
+        placeholder="Your message..."
         className="message-input"
       />
       <button type="submit" disabled={disabled} className="message-submit-button">
-        Submit
+        Send
       </button>
     </form>
   );
