@@ -33,8 +33,11 @@ def dotenv_load(location: str = None) -> dict:
 api_key = dotenv_load()["OPENAI_API_KEY"]
 
 
-# Function to query the GPT4 API.
 def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=0.5):
+    """
+    Query GPT* API
+    """
+    
     url = "https://api.openai.com/v1/chat/completions"
     # model = "gpt-4"
     model = "gpt-3.5-turbo"
@@ -43,8 +46,6 @@ def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=
         role = "user" if msg.byUser else "assistant"
         messages.append({"role": role, "content": msg.text})
     
-    print("Posting to OpenAI API...")
-
     response = requests.post(
         url,
         headers={
@@ -59,11 +60,13 @@ def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=
         })
     )
     r = response.json()["choices"][0]["message"]["content"]
-    print(f"Response from OpenAI API: {r}")
     return r
 
 
 def get_ai_response(topic, messages):
+    """
+    Get the AI's response to the user's message.
+    """
     sys = f"""You are debating against a user. The topic is {topic}.
     You must defend your position and attack the opponent's position.
     The user will defend the opposite view. You never agree with the user.
@@ -82,10 +85,10 @@ def get_ai_response(topic, messages):
     ai_response = chatQuery(api_key, messages, sys, maxTokens=256, temperature=1.0)
     return ai_response
 
+
 def get_ai_welcome(topic):
     """
     Get the invitation message from the AI, that is shown to the user when they start a new debate.
-    
     """
     sys = f"""You are about to start a debate with another user. The topic is {topic}.
     You briefly invite the user to make their first argument.
@@ -95,6 +98,5 @@ def get_ai_welcome(topic):
     """
 
     # Get the AI's response
-    ai_response = chatQuery(api_key, [], sys, maxTokens=256, temperature=1.0)
-    print(ai_response)
+    ai_response = chatQuery(api_key, [], sys, maxTokens=128, temperature=1.0)
     return ai_response

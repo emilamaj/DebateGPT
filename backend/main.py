@@ -27,6 +27,22 @@ async def ai_response(debate: Debate):
     try:
         # Get the AI's response
         ai_response = get_ai_response(debate.topic, debate.messages)
+        print(f"AI response: {ai_response}")
+
+        # Return the AI's response
+        return {"aiResponse": ai_response}
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/api/ai-auto")
+async def ai_auto(debate: Debate):
+    print("Auto-generated response requested...")
+    try:
+        # Reverse the authorship of the messages
+        inv_messages = [Message(text=msg.text, byUser=not msg.byUser) for msg in debate.messages]
+        ai_response = get_ai_response(debate.topic, inv_messages)
+        print(f"Auto-user response: {ai_response}")
 
         # Return the AI's response
         return {"aiResponse": ai_response}
@@ -40,6 +56,7 @@ async def ai_welcome(debate: Debate):
     try:
         # Get the AI's response
         ai_response = get_ai_welcome(debate.topic)
+        print(f"AI welcome message: {ai_response}")
 
         # Return the AI's response
         return {"aiResponse": ai_response}
