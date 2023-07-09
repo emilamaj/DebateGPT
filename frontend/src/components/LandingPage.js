@@ -34,7 +34,7 @@ function LandingPage() {
               type="text"
               value={topic}
               onChange={handleInputChange}
-              placeholder="Enter a debate topic"
+              placeholder="The existence of aliens"
               className="topic-input"
             />
             <button type="submit" className="submit-button">Start Debate</button>
