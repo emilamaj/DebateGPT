@@ -63,6 +63,6 @@ If everything went well, you should be able to access the project at [http://loc
 - [ ] Additional languages (currently only English is supported)
 - [ ] Add debate parameters (aggressive, polite, good faith, etc.)
 - [ ] Debate winner (rated by a different AI agent), argument quality rating
-- [ ] Allow editing of the user's arguments
-- [ ] Allow the AI to respond to the AI's arguments
-- [ ] Help box for new users
+- [x] Allow editing of the user's arguments
+- [x] Allow the AI to respond to the AI's arguments
+- [ ] Emulate depth of thought by adding a delay in the response
