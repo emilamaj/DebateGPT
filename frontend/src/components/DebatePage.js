@@ -10,15 +10,14 @@ axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
 function DebatePage() {
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const location = 
-  useLocation();
+  const [threadState, setThreadState] = useState("ready");
+  const location = useLocation();
   const topic = location.state.topic;
 
   // UseEffect hook to run once on component mount
   React.useEffect(() => {
     const getInitialMessage = async () => {
-      setLoading(true);
+      setThreadState("typing-ai");
 
       try {
         console.log('Getting initial welcome message from AI');
@@ -28,12 +27,13 @@ function DebatePage() {
       } catch (error) {
         console.error('Error getting AI welcome message:', error);
       }
-      setLoading(false);
+      setThreadState("ready");
     };
     getInitialMessage();
   }, [topic]);
 
   const handleUserMessage = async (message) => {
+
     // Register the user message
     let msgs = [...messages, { text: message, byUser: true }]
     setMessages(msgs);
@@ -41,7 +41,8 @@ function DebatePage() {
     // Add small random delay before sending message to AI
     await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000 + 500));
 
-    setLoading(true);
+    setThreadState("typing-ai");
+
     try {
       console.log('Sending messages to AI. New msg:', message);
       const response = await axios.post('/api/ai-response', { topic, messages: msgs });
@@ -51,7 +52,38 @@ function DebatePage() {
     } catch (error) {
       console.error('Error getting AI response:', error);
     }
-    setLoading(false);
+    setThreadState("ready");
+  };
+
+  
+  // Send request to generate the user's message
+  const handleUserAuto = async () => {
+    setThreadState("typing-user");
+    
+    // Add small random delay before sending message to AI
+    await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000 + 500));
+    
+    let generatedResponse = '';
+
+    try {
+      console.log('Requesting AI to generate response to itself');
+      const response = await axios.post('/api/ai-auto', { topic, messages });
+      console.log('AI response:', response.data.aiResponse);
+      generatedResponse = response.data.aiResponse;
+    } catch (error) {
+      console.error('Error getting AI response:', error);
+    }
+    setThreadState("ready");
+    
+    // Follow-up with regular AI response
+    handleUserMessage(generatedResponse);
+  };
+
+  // Edit given message with new text
+  const editMsg = (index, newText) => {
+    const msgs = [...messages];
+    msgs[index].text = newText;
+    setMessages(msgs);
   };
 
   return (
@@ -61,9 +93,9 @@ function DebatePage() {
         <h1 className='header-topic'>{topic}</h1>
       </div>
       <main className="chat-main">
-        <ChatThread messages={messages} isLoading={loading} />
+        <ChatThread messages={messages} threadState={threadState} doEdit={(index, newText) => editMsg(index, newText)} />
       </main>
-      <MessageInputBar onMessageSubmit={handleUserMessage} disabled={loading} />
+      <MessageInputBar onMessageSubmit={handleUserMessage} onMessageAuto={handleUserAuto} disabled={threadState !== "ready"} />
     </div>
   );
 }

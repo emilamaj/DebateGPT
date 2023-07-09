@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './ChatThread.css';
 
-function ChatThread({ messages, isLoading }) {
-  const messagesEndRef = useRef(null);
-
+function ChatThread({ messages, threadState, doEdit }) {
+  // Save message being edited
+  const [edit, setEdit] = useState(null);
+  const editRef = useRef(null);
+  
   // UseEffect hook to scroll to bottom of chat thread on every update
+  const messagesEndRef = useRef(null);
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   });
@@ -12,12 +15,31 @@ function ChatThread({ messages, isLoading }) {
   return (
     <div className="chat-thread">
       {messages.map((message, index) => (
-        <p key={index} className={`message ${message.byUser ? 'user-message' : 'ai-message'}`}>
+        <p ref={edit === index ? editRef : null}
+        onClick={()=>{
+          if (threadState === 'ready') {
+            setEdit(index);
+          }
+        }} 
+        contentEditable={edit === index ? 'true' : 'false'}
+        onBlur={(event)=>{
+          setEdit(null);
+          doEdit(index, event.target.innerText);
+        }}
+
+        key={index} className={`message ${message.byUser ? 'user-message' : 'ai-message'} ${
+          edit === index ? 'message-edition' : ''
+        }`}>
           {message.text}
         </p>
       ))}
-      {isLoading && (
+      {threadState === 'typing-ai' && (
         <p className="message ai-message">
+          <em>typing...</em>
+        </p>
+      )}
+      {threadState === 'typing-user' && (
+        <p className="message user-message">
           <em>typing...</em>
         </p>
       )}
