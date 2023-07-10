@@ -65,4 +65,4 @@ If everything went well, you should be able to access the project at [http://loc
 - [ ] Debate winner (rated by a different AI agent), argument quality rating
 - [x] Allow editing of the user's arguments
 - [x] Allow the AI to respond to the AI's arguments
-- [ ] Emulate depth of thought by adding a delay in the response
+- [x] Emulate depth of thought by adding a delay in the response
