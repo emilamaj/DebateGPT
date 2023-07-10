@@ -6,12 +6,12 @@
     background-color: rgb(52, 53, 64);
     color: white;
     font-family: 'Arial', sans-serif;
-    margin-bottom: 100px;
-    /* height of the input bar */
+    /* Height of the input bar is [73px, 113px] */
+    margin-bottom: 115px;
 }
 
 .debate-page .app-header {
-    padding: 1em;
+    padding: 0.5em;
     margin: 0;
     /* Center the header text */
     display: flex;
@@ -21,8 +21,8 @@
     background-color: #282c34;
 }
 
-.app-header h1 {
-    font-size: 1.5em;
+.debate-page .app-header h1 {
+    font-size: 1.4em;
     margin: 0;
     display: inline;
 }
@@ -37,5 +37,5 @@
     max-width: 900px;
     /* Center the chat message thread */
     margin: 0 auto;
-
+    font-size: 0.9em;
 }
