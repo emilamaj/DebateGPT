@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './MessageInputBar.css';
+import IconSend from './IconSend';
+import IconAuto from './IconAuto';
 
 function MessageInputBar({ onMessageSubmit, onMessageAuto, disabled }) {
   const [message, setMessage] = useState('');
@@ -26,11 +28,13 @@ function MessageInputBar({ onMessageSubmit, onMessageAuto, disabled }) {
         placeholder="Your message..."
         className="message-input"
       />
-      <button type="submit" disabled={disabled} className="message-button message-button-submit">
-        Send
+      <button type="submit" title="Send message" disabled={disabled} className="message-button message-button-submit">
+        <IconSend />
       </button>
 
-      <input type="button" value="Auto" onClick={onMessageAuto} disabled={disabled} className="message-button message-button-auto" />
+      <button type="button" title="Auto-generate message" disabled={disabled} onClick={onMessageAuto} className="message-button message-button-auto">
+        <IconAuto />
+      </button>
     </form>
   );
 }
