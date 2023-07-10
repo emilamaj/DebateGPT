@@ -35,6 +35,7 @@
 .chat-main {
     overflow-y: hidden;
     max-width: 900px;
+    width: 100%;
     /* Center the chat message thread */
     margin: 0 auto;
     font-size: 0.9em;
