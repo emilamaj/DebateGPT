@@ -62,7 +62,8 @@ If everything went well, you should be able to access the project at [http://loc
 - [ ] Add support for GPT-4
 - [ ] Additional languages (currently only English is supported)
 - [ ] Add debate parameters (aggressive, polite, good faith, etc.)
-- [ ] Debate winner (rated by a different AI agent), argument quality rating
+- [ ] Debate winner estimation
+- [ ] Argument quality estimation
 - [x] Allow editing of the user's arguments
 - [x] Allow the AI to respond to the AI's arguments
 - [x] Emulate depth of thought by adding a delay in the response

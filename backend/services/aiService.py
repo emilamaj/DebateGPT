@@ -33,14 +33,12 @@ def dotenv_load(location: str = None) -> dict:
 api_key = dotenv_load()["OPENAI_API_KEY"]
 
 
-def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=0.5):
+def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=0.5, model="gpt-3.5-turbo"):
     """
     Query GPT* API
     """
     
     url = "https://api.openai.com/v1/chat/completions"
-    # model = "gpt-4"
-    model = "gpt-3.5-turbo"
     messages = [{"role": "system", "content": system_prompt}]
     for msg in message_list:
         role = "user" if msg.byUser else "assistant"
@@ -63,7 +61,7 @@ def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=
     return r
 
 
-def get_ai_response(topic, messages):
+def get_ai_response(topic, messages, model="gpt-3.5-turbo"):
     """
     Get the AI's response to the user's message.
     """
@@ -84,11 +82,60 @@ def get_ai_response(topic, messages):
     """
 
     # Get the AI's response
-    ai_response = chatQuery(api_key, messages, sys, maxTokens=256, temperature=1.0)
+    ai_response = chatQuery(api_key, messages, sys, maxTokens=256, temperature=1.0, model=model)
     return ai_response
 
 
-def get_ai_welcome(topic):
+def rate_new_message(messages, msg_to_rate, resp_by_user, model="gpt-3.5-turbo"):
+    """
+    Rate the given new message, in the context of the previous messages.
+    resp_by_user is True if "msg_to_rate" is a response by the user, False if it's a response by the AI.
+    """
+
+    sys = """You are a debate rating assistant.
+    You rate the quality of the messages of the participants in a debate.
+    The debate is between "DebateGPT" and "User".
+    You write a very short comment about the message, saying for example if it is convincing or not.
+    You then write a note, from 1 to 10, about the quality of the message.
+    You format your comment like this: 
+    COMMENT: <comment>
+    NOTE: <note>
+    You only take into account the validity of the arguments, the lack of fallacies, the good faith.
+    You make sure that the participants respond to each other's arguments, and don't change the subject or ignore the arguments.
+    You don't care for politeness. Rudeness is fine.
+    Remember to be very brief. Maximum 1 sentence. No need for full grammatical sentences.
+    You only rate one message, the new one that was just written.
+    """
+
+    debate_str = "Here is the content of the debate between User and DebateGPT:\n\n"
+    for msg in messages:
+        if msg.byUser:
+            debate_str += f"User: {msg.text}\n\n"
+        else:
+            debate_str += f"DebateGPT: {msg.text}\n\n"
+
+    debate_str += "Here is the new message to rate:\n\n"
+    if resp_by_user:
+        debate_str += "User: " + msg_to_rate
+    else:
+        debate_str += "DebateGPT: " + msg_to_rate
+
+
+    class Object(object):
+        pass
+
+    m = Object()
+    m.byUser = True
+    m.text = debate_str
+
+    msgs = [m]
+
+    # Get the AI's response
+    ai_response = chatQuery(api_key, msgs, sys, maxTokens=128, temperature=1.0, model=model)
+    return ai_response
+
+
+def get_ai_welcome(topic, model="gpt-3.5-turbo"):
     """
     Get the invitation message from the AI, that is shown to the user when they start a new debate.
     """
@@ -104,5 +151,5 @@ def get_ai_welcome(topic):
     """
 
     # Get the AI's response
-    ai_response = chatQuery(api_key, [], sys, maxTokens=128, temperature=1.0)
+    ai_response = chatQuery(api_key, [], sys, maxTokens=128, temperature=1.0, model=model)
     return ai_response

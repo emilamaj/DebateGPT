@@ -8,6 +8,18 @@ import './DebatePage.css';
 // Axios default url
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
+// Split a rating into its comment and score
+function splitRating(rating) {
+  /* rating is in the form:
+  COMMENT: <comment>
+  SCORE: <score>
+  */
+  let split = rating.split("\n");
+  let comment = split[0].split(": ")[1];
+  let score = split[1].split(": ")[1];
+  return { comment, score };
+}
+
 function DebatePage() {
   const [messages, setMessages] = useState([]);
   const [threadState, setThreadState] = useState("ready");
@@ -23,7 +35,7 @@ function DebatePage() {
         console.log('Getting initial welcome message from AI');
         const response = await axios.post('/api/ai-welcome', { topic, messages: [] });
         console.log('AI welcome msg:', response.data.aiResponse);
-        setMessages([{ text: response.data.aiResponse, byUser: false }]);
+        setMessages([{ text: response.data.aiResponse, comment: "", note: "", byUser: false }]);
       } catch (error) {
         console.error('Error getting AI welcome message:', error);
       }
@@ -32,22 +44,35 @@ function DebatePage() {
     getInitialMessage();
   }, [topic]);
 
+  // Send request to register the user's message
   const handleUserMessage = async (message) => {
 
     // Register the user message
-    let msgs = [...messages, { text: message, byUser: true }]
+    let msgs = [...messages, { text: message, comment: "", note: "", byUser: true }];
     setMessages(msgs);
 
     // Add small random delay before sending message to AI
     await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000 + 500));
-
     setThreadState("typing-ai");
 
     try {
-      console.log('Sending messages to AI. New msg:', message);
+      // Send request to rate the user's message and generate an AI response
       const response = await axios.post('/api/ai-response', { topic, messages: msgs });
+      console.log('Registering user message:', message);
+      console.log("User message rating:", response.data.userRating);
       console.log('AI response:', response.data.aiResponse);
-      msgs = [...msgs, { text: response.data.aiResponse, byUser: false }]
+      console.log("AI message rating:", response.data.aiRating);
+
+      // Replace last value in messages array with the new rating
+      const userRating = splitRating(response.data.userRating);
+
+      msgs[msgs.length - 1] = { text: message, comment: userRating.comment, note: userRating.score, byUser: true };
+
+      // Add the AI response to the messages array
+      const aiRating = splitRating(response.data.aiRating);
+      msgs = [...msgs, { text: response.data.aiResponse, comment: aiRating.comment, note: aiRating.score, byUser: false }];
+
+      // Update the state
       setMessages(msgs);
     } catch (error) {
       console.error('Error getting AI response:', error);
@@ -55,29 +80,30 @@ function DebatePage() {
     setThreadState("ready");
   };
 
-  
+
   // Send request to generate the user's message
   const handleUserAuto = async () => {
     setThreadState("typing-user");
-    
+
     // Add small random delay before sending message to AI
     await new Promise((resolve) => setTimeout(resolve, Math.random() * 2000 + 500));
-    
+
     let generatedResponse = '';
 
     try {
-      console.log('Requesting AI to generate response to itself');
+      // Send request to generate an AI response
       const response = await axios.post('/api/ai-auto', { topic, messages });
-      console.log('AI response:', response.data.aiResponse);
-      generatedResponse = response.data.aiResponse;
+      console.log('AI response:', response.data.autoResponse);
+      generatedResponse = response.data.autoResponse;
     } catch (error) {
       console.error('Error getting AI response:', error);
     }
     setThreadState("ready");
-    
+
     // Follow-up with regular AI response
     handleUserMessage(generatedResponse);
   };
+
 
   // Edit given message with new text
   const editMsg = (index, newText) => {
