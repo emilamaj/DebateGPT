@@ -1,30 +1,36 @@
 # DebateGPT: A Debate adversary on any topic
+## Access
+You can try out the demo at [debategpt.emileamaj.xyz](http://debategpt.emileamaj.xyz/).
+
 ## Introduction
-DebateGPT is an AI chat adversary that can debate on any topic.  
-You select the topic, and start arguing right away.  
-This project was inspired by Marc Andreessen's remarks on [Lex Fridman's podcast 386](https://www.youtube.com/watch?v=-hxeDjAxvJ8&t=940s) (at 15:40), where talks about his experiments with GPT-4 debating with itself.
+DebateGPT is an AI adversary chatbot that can debate on any topic.  
+You select the topic, and start to debate right away.  
+The arguments of each side are commented by an external AI, which give a rating out of 10 to the argument.  
+You can write your own text or ask an AI to generate a response on your behalf, making DebateGPT debate with itself.  
+DebateGPT will always take the opposite side of your argument, and try to refute it.  
+It uses the [GPT-3.5-turbo](https://platform.openai.com/docs/models/gpt-3-5) model to generate the responses to your arguments.  
 
-![Landing page, with "Taxing the rich" set as the topic](screen-debate-landing.png)
+This project was inspired by Marc Andreessen's remarks on [Lex Fridman's podcast 386](https://www.youtube.com/watch?v=-hxeDjAxvJ8&t=940s) (at 15:40), where he talks about his experiments with GPT-4 debating with itself.
 
-It uses the [GPT-3.5-turbo](https://platform.openai.com/docs/models/gpt-3-5) model to generate responses to your arguments.  
-You can try out the demo at [debategpt.emileamaj.xyz](https://debategpt.emileamaj.xyz/).  
-It uses a simple system prompt instructing the chat-based Large Language Model to debate with the user.  
+## Interface
+![Landing page, with "Taxation" set as the topic](screen-debate-landing.png)
+Set the topic of the debate, and click on "Start debate".  
 
-![The AI taking the side of taxing the rich](screen-debate-thread.png)
+![The AI taking the side of not taxing the poor](screen-debate-thread.png)
 
 The AI automatically takes the opposite side of the user's argument, and tries to refute it.  
 
-
 ![The AI against taxing the rich](screen-debate-thread-opposite.png)
 
-The "convictions" of the AI are in a way, set by the user's initial stance in the debate.  
+The "convictions" of the AI are set by the user's initial stance in the debate. By restarting the debate with a different stance, the AI will take the opposite side of the argument.
 
-## Running on your machine
+## Running the project
 To run this project on your local machine, you need to have [Node.js](https://nodejs.org/en/) installed.
 The backend of this project is in [Python](https://www.python.org/) and uses [FastAPI](https://fastapi.tiangolo.com/).
 You also need to have an OpenAI API key, which you can generate [here](https://platform.openai.com/account/api-keys).
 You need to create `.env` files in the `backend` and `frontend` folders, with the following content:
 
+Set the `REACT_APP_BACKEND_URL` variable to the URL of the backend server.
 ./frontend/.env
 ```
 REACT_APP_BACKEND_URL=http://localhost:8000
@@ -63,6 +69,7 @@ If everything went well, you should be able to access the project at [http://loc
 - [ ] Additional languages (currently only English is supported)
 - [ ] Add debate parameters (aggressive, polite, good faith, etc.)
 - [x] Argument quality estimation
+- [ ] Update ratings after argument text edition
 - [ ] Debate winner estimation
 - [x] Allow editing of the user's arguments
 - [x] Allow the AI to respond to the AI's arguments
