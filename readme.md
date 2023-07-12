@@ -14,11 +14,14 @@ This project was inspired by Marc Andreessen's remarks on [Lex Fridman's podcast
 
 ## Interface
 ![Landing page, with "Taxation" set as the topic](screen-debate-landing.png)
+
 Set the topic of the debate, and click on "Start debate".  
+
 
 ![The AI taking the side of not taxing the poor](screen-debate-thread.png)
 
 The AI automatically takes the opposite side of the user's argument, and tries to refute it.  
+
 
 ![The AI against taxing the rich](screen-debate-thread-opposite.png)
 
