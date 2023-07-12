@@ -22,6 +22,33 @@
     word-wrap: break-word;
 }
 
+.chat-thread>.message * {
+    padding: 0;
+    margin: 0;
+}
+
+.chat-thread .message .message-comment {
+    /* font-size: 0.8em; */
+    color: #e7ff5f;
+    /* margin: 0.2em 0; */
+    overflow: auto;
+    word-wrap: break-word;
+    display: inline;
+}
+
+.chat-thread>.message .message-note {
+    display: inline;
+    /* font-size: 0.8em; */
+    font-weight: bold;
+    
+    color: #e7ff5f;
+
+    margin: 0.2em 0;
+    overflow: auto;
+    word-wrap: break-word;
+}
+
+
 .chat-thread>.message.user-message {
     align-self: flex-end;
     /* alignment for the user's messages */

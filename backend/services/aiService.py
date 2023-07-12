@@ -100,6 +100,7 @@ def rate_new_message(messages, msg_to_rate, resp_by_user, model="gpt-3.5-turbo")
     You format your comment like this: 
     COMMENT: <comment>
     NOTE: <note>
+    Do not add "." at the end of the note.
     You only take into account the validity of the arguments, the lack of fallacies, the good faith.
     You make sure that the participants respond to each other's arguments, and don't change the subject or ignore the arguments.
     You don't care for politeness. Rudeness is fine.

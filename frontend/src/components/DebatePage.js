@@ -20,6 +20,7 @@ function splitRating(rating) {
   return { comment, score };
 }
 
+
 function DebatePage() {
   const [messages, setMessages] = useState([]);
   const [threadState, setThreadState] = useState("ready");
@@ -44,6 +45,7 @@ function DebatePage() {
     getInitialMessage();
   }, [topic]);
 
+
   // Send request to register the user's message
   const handleUserMessage = async (message) => {
 
@@ -59,9 +61,9 @@ function DebatePage() {
       // Send request to rate the user's message and generate an AI response
       const response = await axios.post('/api/ai-response', { topic, messages: msgs });
       console.log('Registering user message:', message);
-      console.log("User message rating:", response.data.userRating);
+      console.log(response.data.userRating);
       console.log('AI response:', response.data.aiResponse);
-      console.log("AI message rating:", response.data.aiRating);
+      console.log(response.data.aiRating);
 
       // Replace last value in messages array with the new rating
       const userRating = splitRating(response.data.userRating);
@@ -111,6 +113,7 @@ function DebatePage() {
     msgs[index].text = newText;
     setMessages(msgs);
   };
+
 
   return (
     <div className="debate-page">
