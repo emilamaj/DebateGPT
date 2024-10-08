@@ -4,8 +4,7 @@ from pydantic import BaseModel
 from services.aiService import get_ai_response, rate_new_message, get_ai_welcome
 import asyncio
 
-GPT_MODEL = "gpt-3.5-turbo"
-# GPT_MODEL = "gpt-4"
+GPT_MODEL = "gpt-4o-mini"
 
 class Message(BaseModel):
     text: str

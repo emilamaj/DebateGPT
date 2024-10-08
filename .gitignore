@@ -28,3 +28,5 @@ yarn-error.log*
 *.zip
 __pycache__
 release
+
+.git

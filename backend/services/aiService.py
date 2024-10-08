@@ -33,7 +33,7 @@ def dotenv_load(location: str = None) -> dict:
 api_key = dotenv_load()["OPENAI_API_KEY"]
 
 
-def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=0.5, model="gpt-3.5-turbo"):
+def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=0.5, model="gpt-4o-mini"):
     """
     Query GPT* API
     """
@@ -61,7 +61,7 @@ def chatQuery(api_key, message_list, system_prompt, maxTokens=1024, temperature=
     return r
 
 
-def get_ai_response(topic, messages, model="gpt-3.5-turbo"):
+def get_ai_response(topic, messages, model="gpt-4o-mini"):
     """
     Get the AI's response to the user's message.
     """
@@ -86,7 +86,7 @@ def get_ai_response(topic, messages, model="gpt-3.5-turbo"):
     return ai_response
 
 
-def rate_new_message(messages, msg_to_rate, resp_by_user, model="gpt-3.5-turbo"):
+def rate_new_message(messages, msg_to_rate, resp_by_user, model="gpt-4o-mini"):
     """
     Rate the given new message, in the context of the previous messages.
     resp_by_user is True if "msg_to_rate" is a response by the user, False if it's a response by the AI.
@@ -137,7 +137,7 @@ def rate_new_message(messages, msg_to_rate, resp_by_user, model="gpt-3.5-turbo")
     return ai_response
 
 
-def get_ai_welcome(topic, model="gpt-3.5-turbo"):
+def get_ai_welcome(topic, model="gpt-4o-mini"):
     """
     Get the invitation message from the AI, that is shown to the user when they start a new debate.
     """
